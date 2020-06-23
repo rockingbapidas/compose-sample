@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Compose-Sample</string>
+    <string name="head_lines">HEADLINES</string>
+</resources>

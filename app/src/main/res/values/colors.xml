@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#dd0d3e</color>
+    <color name="colorPrimaryDark">#c20029</color>
+    <color name="colorAccent">#dd0d3e</color>
+    <color name="background">#ededed</color>
+
+    <color name="newsTitle">#F2F2F2</color>
+    <color name="newsSubTitle">#BABABA</color>
+
+    <color name="colorTransparent">#1A000000</color>
+    <color name="colorTransparentStatus">#66000000</color>
+    <color name="colorTransparentStart">#4D000000</color>
+    <color name="colorTransparentEnd">#E6000000</color>
+</resources>
