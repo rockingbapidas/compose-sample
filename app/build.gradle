@@ -1,0 +1,122 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.bapidas.composesample"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        setProperty("archivesBaseName", "newsapp-v${versionName}(${versionCode})")
+        buildConfigField("int", "DATABASE_VERSION", "1")
+        buildConfigField("String", "DOMAIN", "\"newsapi.org\"")
+        buildConfigField("String", "API_DOMAIN", "\"http://newsapi.org\"")
+        buildConfigField("String", "API_KEY", "\"59b23dbaede34a2488fe2d4da93b9ffb\"")
+        buildConfigField("Boolean", "LOCAL_CACHE", "true")
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerVersion "1.3.70-dev-withExperimentalGoogleExtensions-20200424"
+        kotlinCompilerExtensionVersion "$compose_compiler_extension_version"
+    }
+}
+
+configurations {
+    ktlint
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation('androidx.appcompat:appcompat:1.1.0')
+    implementation('androidx.activity:activity-ktx:1.1.0')
+    implementation "androidx.core:core-ktx:1.3.0"
+    implementation "androidx.multidex:multidex:2.0.1"
+
+    kapt("androidx.compose:compose-compiler:$compose_version")
+    implementation("androidx.compose:compose-runtime:$compose_version")
+    implementation("androidx.ui:ui-core:$compose_version")
+    implementation("androidx.ui:ui-layout:$compose_version")
+    implementation("androidx.ui:ui-material:$compose_version")
+    implementation("androidx.ui:ui-material-icons-extended:$compose_version")
+    implementation("androidx.ui:ui-foundation:$compose_version")
+    implementation("androidx.ui:ui-animation:$compose_version")
+    implementation "androidx.ui:ui-tooling:$compose_version"
+    implementation "androidx.ui:ui-livedata:$compose_version"
+
+    implementation("com.google.dagger:dagger-android-support:$dagger_version")
+    kapt("com.google.dagger:dagger-compiler:$dagger_version")
+    kapt("com.google.dagger:dagger-android-processor:$dagger_version")
+
+    implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+
+    implementation("androidx.paging:paging-runtime-ktx:2.1.2")
+
+    implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
+
+    implementation("com.squareup.okhttp3:okhttp:$ok_http_version")
+    implementation("com.squareup.okhttp3:okhttp-urlconnection:$ok_http_version")
+    implementation("com.squareup.okhttp3:logging-interceptor:$ok_http_version")
+
+    implementation("com.google.code.gson:gson:2.8.6")
+
+    implementation("com.jakewharton.timber:timber:4.7.1")
+
+    implementation("io.coil-kt:coil:0.11.0")
+
+    androidTestImplementation("junit:junit:4.13")
+    androidTestImplementation("androidx.test:rules:1.2.0")
+    androidTestImplementation("androidx.test:runner:1.2.0")
+    androidTestImplementation("androidx.ui:ui-core:$compose_version")
+    androidTestImplementation("androidx.ui:ui-test:$compose_version")
+
+    ktlint "com.pinterest:ktlint:0.36.0"
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    main = "com.pinterest.ktlint.Main"
+    classpath = configurations.ktlint
+    args "src/**/*.kt"
+}
+
+check.dependsOn ktlint
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    main = "com.pinterest.ktlint.Main"
+    classpath = configurations.ktlint
+    args "-F", "src/**/*.kt"
+}
