@@ -89,7 +89,7 @@ private fun NewsListComponent(news: PagedList<Article>) {
 private fun NewsCard(article: Article, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxWidth()
-            .preferredHeight(220.dp)
+            .preferredHeight(200.dp)
             .padding(start = 16.dp, end = 16.dp, top = 16.dp)
     ) {
         val fullModifier = Modifier.fillMaxWidth().fillMaxHeight()

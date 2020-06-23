@@ -44,13 +44,13 @@ private fun TopBar() {
             Spacer(modifier = Modifier.preferredHeight(context.getStatusBarHeight().dp))
             Row(modifier = Modifier.fillMaxWidth()) {
                 Image(
-                    vectorResource(R.drawable.ic_arrow_back_white_42dp),
+                    asset = vectorResource(R.drawable.ic_arrow_back_white_42dp),
                     modifier = Modifier.clickable(onClick = {
                         context.onBackPressed()
                     })
                 )
                 Image(
-                    vectorResource(R.drawable.ic_baseline_language_24),
+                    asset = vectorResource(R.drawable.ic_baseline_language_24),
                     modifier = Modifier.clickable(onClick = {
 
                     })

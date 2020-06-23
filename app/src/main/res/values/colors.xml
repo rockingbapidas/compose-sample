@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#dd0d3e</color>
-    <color name="colorPrimaryDark">#c20029</color>
+    <color name="colorPrimaryDark">#dd0d3e</color>
     <color name="colorAccent">#dd0d3e</color>
+
     <color name="background">#ededed</color>
 
     <color name="newsTitle">#F2F2F2</color>
