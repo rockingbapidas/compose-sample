@@ -26,10 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".presentation.news.detail.NewsDetailsActivity"
-            android:screenOrientation="unspecified" />
     </application>
 
 </manifest>

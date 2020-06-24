@@ -1,13 +1,10 @@
-package com.bapidas.composesample.presentation.news
+package com.bapidas.composesample.presentation.news.screens
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.getValue
 import androidx.compose.remember
 import androidx.paging.PagedList
 import androidx.ui.core.Alignment
-import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.core.tag
 import androidx.ui.foundation.*
@@ -27,7 +24,7 @@ import com.bapidas.composesample.R
 import com.bapidas.composesample.presentation.base.networkImageComponent
 import com.bapidas.composesample.presentation.base.theme.NewsTheme
 import com.bapidas.composesample.presentation.model.Article
-import com.bapidas.composesample.presentation.news.detail.NewsDetailsActivity
+import com.bapidas.composesample.presentation.news.NewsListViewModel
 
 @Composable
 fun NewsScreen(newsListViewModel: NewsListViewModel) {
@@ -40,7 +37,9 @@ fun NewsScreen(newsListViewModel: NewsListViewModel) {
                 TopBar()
             },
             bodyContent = {
-                NewsContent(newsListViewModel)
+                NewsContent(
+                    newsListViewModel
+                )
             })
     }
 }
@@ -62,7 +61,11 @@ private fun TopBar() {
 private fun NewsContent(newsListViewModel: NewsListViewModel) {
     val data by newsListViewModel.newsArticles.observeAsState()
     if (data.isNullOrEmpty().not()) {
-        data?.let { NewsListComponent(it) }
+        data?.let {
+            NewsListComponent(
+                it
+            )
+        }
     } else {
         NewsLoadingComponent()
     }
@@ -70,17 +73,18 @@ private fun NewsContent(newsListViewModel: NewsListViewModel) {
 
 @Composable
 private fun NewsListComponent(news: PagedList<Article>) {
-    val context = ContextAmbient.current as AppCompatActivity
     VerticalScroller {
         news.forEach {
-            NewsCard(it, modifier = Modifier.clickable(onClick = {
-                context.startActivity(
-                    Intent(
-                        context, NewsDetailsActivity::class.java
-                    ).apply {
-                        putExtra(NewsDetailsActivity.NEWS_EXTRA_DATA, it)
-                    })
-            }))
+            NewsCard(
+                it,
+                modifier = Modifier.clickable(onClick = {
+                    navigateTo(
+                        Screen.NewsDetail(
+                            it
+                        )
+                    )
+                })
+            )
         }
     }
 }

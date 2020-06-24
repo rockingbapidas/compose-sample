@@ -1,8 +1,7 @@
-package com.bapidas.composesample.presentation.news.detail
+package com.bapidas.composesample.presentation.news.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.compose.getValue
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.core.tag
@@ -10,7 +9,6 @@ import androidx.ui.foundation.*
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.VerticalGradient
 import androidx.ui.layout.*
-import androidx.ui.livedata.observeAsState
 import androidx.ui.material.TopAppBar
 import androidx.ui.res.colorResource
 import androidx.ui.res.vectorResource
@@ -25,15 +23,17 @@ import com.bapidas.composesample.presentation.base.networkImageComponent
 import com.bapidas.composesample.presentation.model.Article
 
 @Composable
-fun NewsDetailScreen(newsDetailViewModel: NewsDetailViewModel) {
+fun NewsDetailsScreen(article: Article) {
     Stack(modifier = Modifier.fillMaxSize()) {
-        NewsDetail(newsDetailViewModel)
-        TopBar()
+        NewsDetailContent(
+            article
+        )
+        TopBar(article)
     }
 }
 
 @Composable
-private fun TopBar() {
+private fun TopBar(article: Article) {
     val context = ContextAmbient.current as AppCompatActivity
     TopAppBar(
         modifier = Modifier.preferredHeight(100.dp).fillMaxWidth(),
@@ -42,28 +42,33 @@ private fun TopBar() {
     ) {
         Column {
             Spacer(modifier = Modifier.preferredHeight(context.getStatusBarHeight().dp))
-            Row(modifier = Modifier.fillMaxWidth()) {
+            ConstraintLayout(modifier = Modifier.fillMaxSize(), constraintSet = ConstraintSet {
+                tag("backArrow").apply {
+                    left constrainTo parent.left
+                    top constrainTo parent.top
+                }
+                tag("webGlobe").apply {
+                    right constrainTo parent.right
+                    top constrainTo parent.top
+                }
+            }) {
                 Image(
                     asset = vectorResource(R.drawable.ic_arrow_back_white_42dp),
                     modifier = Modifier.clickable(onClick = {
-                        context.onBackPressed()
-                    })
+                        navigateTo(
+                            Screen.NewsList
+                        )
+                    }).tag("backArrow")
                 )
                 Image(
                     asset = vectorResource(R.drawable.ic_baseline_language_24),
                     modifier = Modifier.clickable(onClick = {
-
-                    })
+                        article.url?.let { navigateTo(Screen.NewsBrowser(it)) }
+                    }).tag("webGlobe")
                 )
             }
         }
     }
-}
-
-@Composable
-private fun NewsDetail(newsDetailViewModel: NewsDetailViewModel) {
-    val article by newsDetailViewModel.article.observeAsState()
-    article?.let { NewsDetailContent(it) }
 }
 
 @Composable
@@ -117,18 +122,29 @@ private fun NewsDetailContent(article: Article) {
                 overflow = TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.preferredHeight(64.dp))
-            Row {
+            ConstraintLayout(modifier = Modifier.fillMaxWidth(), constraintSet = ConstraintSet {
+                tag("sourceText").apply {
+                    left constrainTo parent.left
+                    top constrainTo parent.top
+                }
+                tag("dateText").apply {
+                    right constrainTo parent.right
+                    top constrainTo parent.top
+                }
+            }) {
                 Text(
                     text = article.sourceName.orEmpty(),
                     color = colorResource(R.color.newsSubTitle),
                     fontSize = 20.sp,
-                    fontFamily = fontFamily(font(R.font.roboto_slab_regular))
+                    fontFamily = fontFamily(font(R.font.roboto_slab_regular)),
+                    modifier = Modifier.tag("sourceText")
                 )
                 Text(
                     text = article.dateString,
                     color = colorResource(R.color.newsSubTitle),
                     fontSize = 20.sp,
-                    fontFamily = fontFamily(font(R.font.roboto_slab_regular))
+                    fontFamily = fontFamily(font(R.font.roboto_slab_regular)),
+                    modifier = Modifier.tag("dateText")
                 )
             }
             Spacer(modifier = Modifier.preferredHeight(16.dp))
