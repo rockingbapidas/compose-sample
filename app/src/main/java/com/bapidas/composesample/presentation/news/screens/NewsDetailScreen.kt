@@ -18,22 +18,22 @@ import androidx.ui.text.style.TextOverflow
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
 import com.bapidas.composesample.R
+import com.bapidas.composesample.presentation.base.compose.NetworkImageComponent
 import com.bapidas.composesample.presentation.base.extension.getStatusBarHeight
-import com.bapidas.composesample.presentation.base.networkImageComponent
 import com.bapidas.composesample.presentation.model.Article
 
 @Composable
 fun NewsDetailsScreen(article: Article) {
     Stack(modifier = Modifier.fillMaxSize()) {
-        NewsDetailContent(
+        NewsDetailComponent(
             article
         )
-        TopBar(article)
+        TopBarComponent(article)
     }
 }
 
 @Composable
-private fun TopBar(article: Article) {
+private fun TopBarComponent(article: Article) {
     val context = ContextAmbient.current as AppCompatActivity
     TopAppBar(
         modifier = Modifier.preferredHeight(100.dp).fillMaxWidth(),
@@ -72,7 +72,7 @@ private fun TopBar(article: Article) {
 }
 
 @Composable
-private fun NewsDetailContent(article: Article) {
+private fun NewsDetailComponent(article: Article) {
     val fullModifier = Modifier.fillMaxWidth().fillMaxHeight()
     ConstraintLayout(
         constraintSet = ConstraintSet {
@@ -94,7 +94,7 @@ private fun NewsDetailContent(article: Article) {
                 bottom constrainTo parent.bottom
             }
         }) {
-        networkImageComponent(
+        NetworkImageComponent(
             article.urlToImage.orEmpty(),
             modifier = fullModifier.tag("imageView")
         )

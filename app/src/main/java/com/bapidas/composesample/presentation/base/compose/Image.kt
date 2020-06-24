@@ -1,4 +1,4 @@
-package com.bapidas.composesample.presentation.base
+package com.bapidas.composesample.presentation.base.compose
 
 import androidx.compose.*
 import androidx.core.graphics.drawable.toBitmap
@@ -17,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
-fun networkImageComponent(
+fun NetworkImageComponent(
     urlToImage: String,
     modifier: Modifier = Modifier.fillMaxHeight().fillMaxWidth()
 ) {

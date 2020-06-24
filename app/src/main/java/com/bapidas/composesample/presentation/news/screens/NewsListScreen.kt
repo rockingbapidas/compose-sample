@@ -21,7 +21,7 @@ import androidx.ui.text.style.TextOverflow
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
 import com.bapidas.composesample.R
-import com.bapidas.composesample.presentation.base.networkImageComponent
+import com.bapidas.composesample.presentation.base.compose.NetworkImageComponent
 import com.bapidas.composesample.presentation.base.theme.NewsTheme
 import com.bapidas.composesample.presentation.model.Article
 import com.bapidas.composesample.presentation.news.NewsListViewModel
@@ -34,10 +34,10 @@ fun NewsScreen(newsListViewModel: NewsListViewModel) {
                 ScaffoldState()
             },
             topAppBar = {
-                TopBar()
+                TopBarComponent()
             },
             bodyContent = {
-                NewsContent(
+                NewsBodyContent(
                     newsListViewModel
                 )
             })
@@ -45,7 +45,7 @@ fun NewsScreen(newsListViewModel: NewsListViewModel) {
 }
 
 @Composable
-private fun TopBar() {
+private fun TopBarComponent() {
     TopAppBar(title = {
         Column(
             modifier = Modifier.fillMaxWidth().fillMaxHeight(),
@@ -58,11 +58,11 @@ private fun TopBar() {
 }
 
 @Composable
-private fun NewsContent(newsListViewModel: NewsListViewModel) {
+private fun NewsBodyContent(newsListViewModel: NewsListViewModel) {
     val data by newsListViewModel.newsArticles.observeAsState()
     if (data.isNullOrEmpty().not()) {
         data?.let {
-            NewsListComponent(
+            NewsListConent(
                 it
             )
         }
@@ -72,10 +72,10 @@ private fun NewsContent(newsListViewModel: NewsListViewModel) {
 }
 
 @Composable
-private fun NewsListComponent(news: PagedList<Article>) {
+private fun NewsListConent(news: PagedList<Article>) {
     VerticalScroller {
         news.forEach {
-            NewsCard(
+            NewsCardComponent(
                 it,
                 modifier = Modifier.clickable(onClick = {
                     navigateTo(
@@ -90,7 +90,7 @@ private fun NewsListComponent(news: PagedList<Article>) {
 }
 
 @Composable
-private fun NewsCard(article: Article, modifier: Modifier = Modifier) {
+private fun NewsCardComponent(article: Article, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxWidth()
             .preferredHeight(200.dp)
@@ -122,7 +122,7 @@ private fun NewsCard(article: Article, modifier: Modifier = Modifier) {
                         bottom constrainTo parent.bottom
                     }
                 }) {
-                networkImageComponent(
+                NetworkImageComponent(
                     article.urlToImage.orEmpty(),
                     modifier = fullModifier.tag("imageView")
                 )
