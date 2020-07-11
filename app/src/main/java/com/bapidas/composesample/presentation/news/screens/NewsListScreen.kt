@@ -20,6 +20,7 @@ import androidx.ui.text.font.fontFamily
 import androidx.ui.text.style.TextOverflow
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
+import androidx.ui.viewinterop.AndroidView
 import com.bapidas.composesample.R
 import com.bapidas.composesample.presentation.base.compose.NetworkImageComponent
 import com.bapidas.composesample.presentation.base.theme.NewsTheme
@@ -73,7 +74,7 @@ private fun NewsBodyContent(newsListViewModel: NewsListViewModel) {
 
 @Composable
 private fun NewsListConent(news: PagedList<Article>) {
-    VerticalScroller {
+    /*VerticalScroller {
         news.forEach {
             NewsCardComponent(
                 it,
@@ -86,6 +87,19 @@ private fun NewsListConent(news: PagedList<Article>) {
                 })
             )
         }
+    }*/
+
+    AdapterList(news) {
+        NewsCardComponent(
+            it,
+            modifier = Modifier.clickable(onClick = {
+                navigateTo(
+                    Screen.NewsDetail(
+                        it
+                    )
+                )
+            })
+        )
     }
 }
 
@@ -96,13 +110,14 @@ private fun NewsCardComponent(article: Article, modifier: Modifier = Modifier) {
             .preferredHeight(200.dp)
             .padding(start = 16.dp, end = 16.dp, top = 16.dp)
     ) {
-        val fullModifier = Modifier.fillMaxWidth().fillMaxHeight()
+        val fullModifier = Modifier.fillMaxSize()
         Card(
             shape = RoundedCornerShape(8.dp),
             elevation = 8.dp,
             modifier = fullModifier
         ) {
             ConstraintLayout(
+                modifier = fullModifier,
                 constraintSet = ConstraintSet {
                     tag("imageView").apply {
                         right constrainTo parent.right
@@ -126,6 +141,7 @@ private fun NewsCardComponent(article: Article, modifier: Modifier = Modifier) {
                     article.urlToImage.orEmpty(),
                     modifier = fullModifier.tag("imageView")
                 )
+
                 Box(
                     modifier = fullModifier.drawBackground(
                         VerticalGradient(
