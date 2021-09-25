@@ -1,12 +1,12 @@
 package com.bapidas.composesample.presentation.news.screens
 
-import androidx.compose.Composable
-import androidx.compose.getValue
-import androidx.compose.mutableStateOf
-import androidx.compose.setValue
-import androidx.ui.animation.Crossfade
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.Surface
+import androidx.compose.animation.Crossfade
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import com.bapidas.composesample.presentation.model.Article
 import com.bapidas.composesample.presentation.news.NewsListViewModel
 

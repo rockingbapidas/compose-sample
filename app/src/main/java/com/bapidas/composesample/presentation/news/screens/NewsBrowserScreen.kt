@@ -1,13 +1,13 @@
 package com.bapidas.composesample.presentation.news.screens
 
-import androidx.compose.Composable
-import androidx.ui.core.Modifier
-import androidx.ui.layout.Stack
-import androidx.ui.layout.fillMaxSize
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 
 @Composable
 fun NewsBrowserScreen(address: String) {
-    Stack(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize()) {
         //TODO Upcoming
     }
 }

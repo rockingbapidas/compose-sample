@@ -4,13 +4,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 31
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.bapidas.composesample"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
@@ -32,8 +32,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {
@@ -45,33 +45,49 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerVersion "1.3.70-dev-withExperimentalGoogleExtensions-20200424"
-        kotlinCompilerExtensionVersion "$compose_compiler_extension_version"
+        kotlinCompilerExtensionVersion '1.0.2'
     }
-}
-
-configurations {
-    ktlint
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation('androidx.appcompat:appcompat:1.1.0')
-    implementation('androidx.activity:activity-ktx:1.1.0')
-    implementation "androidx.core:core-ktx:1.3.0"
+    implementation('androidx.appcompat:appcompat:1.3.1')
+    implementation('androidx.activity:activity-ktx:1.3.1')
+    implementation "androidx.core:core-ktx:1.6.0"
     implementation "androidx.multidex:multidex:2.0.1"
 
-    kapt("androidx.compose:compose-compiler:$compose_version")
-    implementation("androidx.compose:compose-runtime:$compose_version")
-    implementation("androidx.ui:ui-core:$compose_version")
-    implementation("androidx.ui:ui-layout:$compose_version")
-    implementation("androidx.ui:ui-material:$compose_version")
-    implementation("androidx.ui:ui-material-icons-extended:$compose_version")
-    implementation("androidx.ui:ui-foundation:$compose_version")
-    implementation("androidx.ui:ui-animation:$compose_version")
-    implementation "androidx.ui:ui-tooling:$compose_version"
-    implementation "androidx.ui:ui-livedata:$compose_version"
+    implementation("androidx.compose.ui:ui:$compose_version")
+    implementation("androidx.compose.ui:ui-tooling:$compose_version")
+    implementation("androidx.compose.foundation:foundation:$compose_version")
+    implementation("androidx.compose.material:material:$compose_version")
+    implementation("androidx.compose.material:material-icons-core:$compose_version")
+    implementation("androidx.compose.material:material-icons-extended:$compose_version")
+    implementation("androidx.compose.runtime:runtime-livedata:$compose_version")
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02"
+    implementation "androidx.activity:activity-compose:$jetpack_compose_activity"
+
+    /*implementation "androidx.compose.runtime:runtime-rxjava2:$compose_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compos:$jetpack_compose_view_model"*/
+
+    implementation("com.github.skydoves:landscapist-coil:1.3.6")
+
+    /*implementation "dev.chrisbanes.accompanist:accompanist-coil:0.18.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-picasso:0.18.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-glide:0.18.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-drawablepainter:0.18.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-insets:0.18.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-insets-ui:0.18.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-navigation-animation:0.18.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-navigation-material:0.18.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-pager:0.18.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-pager-indicators:0.18.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-permissions:0.18.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-placeholder:0.18.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-placeholder-material:0.18.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-flowlayout:0.18.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-systemuicontroller:0.18.0"
+    implementation "dev.chrisbanes.accompanist:accompanist-swiperefresh:0.18.0"*/
 
     implementation("com.google.dagger:dagger-android-support:$dagger_version")
     kapt("com.google.dagger:dagger-compiler:$dagger_version")
@@ -91,32 +107,9 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:$ok_http_version")
 
     implementation("com.google.code.gson:gson:2.8.6")
-
     implementation("com.jakewharton.timber:timber:4.7.1")
 
-    implementation("io.coil-kt:coil:0.11.0")
-
-    androidTestImplementation("junit:junit:4.13")
-    androidTestImplementation("androidx.test:rules:1.2.0")
-    androidTestImplementation("androidx.test:runner:1.2.0")
-    androidTestImplementation("androidx.ui:ui-core:$compose_version")
-    androidTestImplementation("androidx.ui:ui-test:$compose_version")
-
-    ktlint "com.pinterest:ktlint:0.36.0"
-}
-
-task ktlint(type: JavaExec, group: "verification") {
-    description = "Check Kotlin code style."
-    main = "com.pinterest.ktlint.Main"
-    classpath = configurations.ktlint
-    args "src/**/*.kt"
-}
-
-check.dependsOn ktlint
-
-task ktlintFormat(type: JavaExec, group: "formatting") {
-    description = "Fix Kotlin code style deviations."
-    main = "com.pinterest.ktlint.Main"
-    classpath = configurations.ktlint
-    args "-F", "src/**/*.kt"
+    androidTestImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test:rules:1.4.0")
+    androidTestImplementation("androidx.test:runner:1.4.0")
 }

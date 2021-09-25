@@ -1,6 +1,6 @@
 package com.bapidas.composesample.presentation.news
 
-import androidx.ui.core.setContent
+import androidx.activity.compose.setContent
 import com.bapidas.composesample.presentation.base.activity.BaseActivity
 import com.bapidas.composesample.presentation.news.screens.AppContent
 import com.bapidas.composesample.presentation.news.screens.NewsStatus
@@ -15,9 +15,7 @@ class NewsListActivity : BaseActivity<NewsListViewModel>() {
     override fun onViewModelCreated() {
         super.onViewModelCreated()
         setContent {
-            AppContent(
-                viewModel
-            )
+            AppContent(viewModel)
         }
     }
 
