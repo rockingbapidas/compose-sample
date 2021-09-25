@@ -8,11 +8,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.bapidas.composesample.presentation.model.Article
-import com.bapidas.composesample.presentation.news.NewsListViewModel
+import com.bapidas.composesample.presentation.news.NewsViewModel
 
 @Composable
 fun AppContent(
-    newsListViewModel: NewsListViewModel
+    newsListViewModel: NewsViewModel
 ) {
     Crossfade(NewsStatus.currentScreen) { screen ->
         Surface(color = MaterialTheme.colors.background) {

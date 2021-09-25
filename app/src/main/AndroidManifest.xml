@@ -20,7 +20,7 @@
         tools:targetApi="n">
 
         <activity
-            android:name=".presentation.news.NewsListActivity"
+            android:name=".presentation.news.NewsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

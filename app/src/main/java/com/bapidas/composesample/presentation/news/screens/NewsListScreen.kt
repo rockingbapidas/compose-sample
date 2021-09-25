@@ -28,10 +28,10 @@ import com.bapidas.composesample.presentation.base.compose.NetworkImageComponent
 import com.bapidas.composesample.presentation.base.theme.NewsTheme
 import com.bapidas.composesample.presentation.base.theme.robotoFamily
 import com.bapidas.composesample.presentation.model.Article
-import com.bapidas.composesample.presentation.news.NewsListViewModel
+import com.bapidas.composesample.presentation.news.NewsViewModel
 
 @Composable
-fun NewsScreen(newsListViewModel: NewsListViewModel) {
+fun NewsScreen(newsListViewModel: NewsViewModel) {
     NewsTheme {
         Scaffold(
             topBar = {
@@ -61,7 +61,7 @@ private fun TopBarComponent() {
 }
 
 @Composable
-private fun NewsBodyContent(newsListViewModel: NewsListViewModel) {
+private fun NewsBodyContent(newsListViewModel: NewsViewModel) {
     val data by newsListViewModel.newsArticles.observeAsState()
     if (data.isNullOrEmpty().not()) {
         data?.let { pagedListArticle ->

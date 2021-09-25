@@ -15,7 +15,7 @@ import com.bapidas.composesample.presentation.news.paging.NewsDataSourceFactory
 import javax.inject.Inject
 
 @ActivityScope
-class NewsListViewModel @Inject constructor(private val mNewsRepository: NewsRepository) :
+class NewsViewModel @Inject constructor(private val mNewsRepository: NewsRepository) :
     BaseActivityViewModel() {
 
     //Live data Paged List
