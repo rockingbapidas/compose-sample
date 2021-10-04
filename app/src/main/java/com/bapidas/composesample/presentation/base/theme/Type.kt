@@ -1,31 +1,41 @@
 package com.bapidas.composesample.presentation.base.theme
 
-import androidx.ui.material.Typography
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontWeight
-import androidx.ui.text.font.font
-import androidx.ui.text.font.fontFamily
-import androidx.ui.unit.sp
+import androidx.compose.material.Typography
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import com.bapidas.composesample.R
 
-private val regular = font(R.font.roboto_slab_regular)
-private val medium = font(R.font.roboto_slab_medium, FontWeight.W500)
-private val semibold = font(R.font.roboto_slab_semi_bold, FontWeight.W600)
-private val bold = font(R.font.roboto_slab_bold, FontWeight.W700)
+private val regular = Font(R.font.roboto_slab_regular)
+private val medium = Font(R.font.roboto_slab_medium, FontWeight.W500)
+private val semi_bold = Font(R.font.roboto_slab_semi_bold, FontWeight.W600)
+private val bold = Font(R.font.roboto_slab_bold, FontWeight.W700)
 
-private val appFontFamily = fontFamily(
+val robotoFamily = FontFamily(
+    Font(R.font.roboto_slab_light, FontWeight.Light),
+    Font(R.font.roboto_slab_regular, FontWeight.Normal),
+    Font(R.font.roboto_slab_medium, FontWeight.Medium),
+    Font(R.font.roboto_slab_bold, FontWeight.Bold)
+)
+
+private val appFontFamily = FontFamily(
     fonts = listOf(
         regular,
         medium,
-        semibold,
+        semi_bold,
         bold
     )
 )
 
-private val bodyFontFamily = fontFamily(
+private val bodyFontFamily = FontFamily(
     fonts = listOf(
-        font(R.font.roboto_slab_regular),
-        font(R.font.roboto_slab_bold, FontWeight.Bold)
+        Font(R.font.roboto_slab_regular),
+        Font(R.font.roboto_slab_bold, FontWeight.Bold)
     )
 )
 
@@ -79,4 +89,19 @@ val themeTypography = Typography(
         fontWeight = FontWeight.W500,
         fontSize = 12.sp
     )
+)
+
+val LightThemeColors = lightColors(
+    primary = Red700,
+    primaryVariant = Red700,
+    secondary = Red700,
+    secondaryVariant = Red700,
+    error = Red900
+)
+
+val DarkThemeColors = darkColors(
+    primary = Color.Black,
+    primaryVariant = Color.Black,
+    secondary = Color.Black,
+    error = Red900
 )

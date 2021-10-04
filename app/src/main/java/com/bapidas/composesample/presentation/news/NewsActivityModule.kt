@@ -10,14 +10,14 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module(includes = [BaseActivityModule::class])
-abstract class NewsListActivityModule {
+abstract class NewsActivityModule {
     @Binds
     @ActivityScope
-    abstract fun bindActivity(activity: NewsListActivity): AppCompatActivity
+    abstract fun bindActivity(activity: NewsActivity): AppCompatActivity
 
     @Binds
     @IntoMap
-    @ActivityViewModelKey(NewsListViewModel::class)
+    @ActivityViewModelKey(NewsViewModel::class)
     @ActivityScope
-    abstract fun bindViewModel(viewModel: NewsListViewModel): BaseActivityViewModel
+    abstract fun bindViewModel(viewModel: NewsViewModel): BaseActivityViewModel
 }
